@@ -75,7 +75,7 @@ const Testimonials = () => {
             Client <span className="text-gradient">Testimonials</span>
           </h2>
           <p className="text-lg text-on-tertiary max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what our valued hospitality clients have to say about their digital transformation journey with Huguen.
+            Do not just take our word for it. Here is what our valued hospitality clients have to say about their digital transformation journey with Huguen.
           </p>
         </motion.div>
 

@@ -182,7 +182,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   Thank You!
                 </h4>
                 <p className="text-on-tertiary">
-                  Your project inquiry has been sent successfully. We'll get back to you within 2 hours with a detailed proposal.
+                  Your project inquiry has been sent successfully. We'll get back to you within 24 hours with a detailed proposal.
                 </p>
               </motion.div>
             ) : (
@@ -205,7 +205,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-on-secondary mb-2">
-                      Email Address *
+                      Email Address 
                     </label>
                     <input
                       type="email"

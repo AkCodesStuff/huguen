@@ -234,7 +234,7 @@ const Pricing = () => {
           
           <div className="mt-8 text-center">
             <p className="text-sm text-on-tertiary">
-              *Domain Charges and Gateway Fees Applicable Separately | All prices are subject to taxes
+              Domain Charges and Gateway Fees Applicable Separately | All prices are subject to taxes
             </p>
           </div>
         </motion.div>

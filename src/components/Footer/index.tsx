@@ -79,7 +79,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary" />
-                <span className="text-sm">+91-XXXXXXXXXX</span>
+                <span className="text-sm">+91-8628801218</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary" />
@@ -159,21 +159,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white/10 hover:bg-primary hover:text-on-primary p-3 rounded-lg transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
+  
           </motion.div>
         </div>
       </div>
