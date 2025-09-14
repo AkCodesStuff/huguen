@@ -62,11 +62,8 @@ const Footer = () => {
             viewport={{ once: true }}
             className="lg:col-span-1"
           >
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-on-primary font-bold text-lg">H</span>
-              </div>
-              <span className="text-xl font-bold">Huguen</span>
+            <div className="flex items-center space-x-2 mb-6 w-48">
+              <img src="/logo.png" alt="logo" />
             </div>
             <p className="text-secondary/80 mb-6 leading-relaxed">
               Delhi-based full-stack solution firm dedicated exclusively to the hospitality sector. 
@@ -175,7 +172,7 @@ const Footer = () => {
               viewport={{ once: true }}
               className="text-secondary/60 text-sm mb-4 md:mb-0"
             >
-              © 2024 Huguen. All rights reserved. | Privacy Policy | Terms of Service
+              © 2025 Huguen. All rights reserved. | Privacy Policy | Terms of Service
             </motion.p>
             
             <motion.button

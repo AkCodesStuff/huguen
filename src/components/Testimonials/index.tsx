@@ -12,26 +12,20 @@ const Testimonials = () => {
 
   const testimonials = [
     {
-      name: "Rajesh Kumar",
-      role: "Hotel Owner",
-      location: "Delhi, India",
+
       rating: 5,
       text: "Huguen transformed our hotel's digital presence completely. Our direct bookings increased by 40% within 3 months. The website is beautiful and the booking system works flawlessly.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
     },
 
     {
-      name: "Amit Patel",
-      role: "Villa Owner",
-      location: "Udaipur, India",
+ 
       rating: 5,
       text: "From website design to channel management, Huguen handled everything seamlessly. Our online visibility improved dramatically and guest bookings are now much easier to manage.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
     },
     {
-      name: "Sunita Reddy",
-      role: "Homestay Owner",
-      location: "Kerala, India",
+ 
       rating: 5,
       text: "The SEO services brought us so many new guests. Huguen made our small homestay look as professional as any luxury hotel online. Amazing work!",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
@@ -107,7 +101,7 @@ const Testimonials = () => {
 
               {/* Testimonial Text */}
               <p className="text-on-tertiary mb-6 leading-relaxed">
-                "{testimonial.text}"
+                {testimonial.text}
               </p>
 
               {/* Guest Info */}
@@ -142,15 +136,12 @@ const Testimonials = () => {
                 <div className="text-4xl font-bold text-primary mb-2">98%</div>
                 <div className="text-on-tertiary">Would Recommend</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2">100+</div>
-                <div className="text-on-tertiary">Hotels Served</div>
-              </div>
+           
             </div>
 
             <p className="text-on-tertiary text-lg max-w-2xl mx-auto">
               Our commitment to excellence is reflected in the consistently high ratings and 
-              positive feedback from our hospitality clients. We're proud to be recognized as 
+              positive feedback from our hospitality clients. We are proud to be recognized as 
               a leading technology partner for the hospitality industry.
             </p>
           </div>

@@ -182,7 +182,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   Thank You!
                 </h4>
                 <p className="text-on-tertiary">
-                  Your project inquiry has been sent successfully. We'll get back to you within 24 hours with a detailed proposal.
+                  Your project inquiry has been sent successfully. We will get back to you within 24 hours with a detailed proposal.
                 </p>
               </motion.div>
             ) : (
@@ -190,7 +190,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-on-secondary mb-2">
-                      Full Name *
+                      Full Name 
                     </label>
                     <input
                       type="text"
@@ -232,7 +232,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="+91 XXXXX-XXXXX"
                     />
                   </div>
                   <div>

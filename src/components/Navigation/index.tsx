@@ -64,10 +64,9 @@ const Navigation = () => {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-2"
           >
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-on-primary font-bold text-lg">H</span>
+            <div className='w-32'>
+            <img src="/logo.png" alt="Our logo"/>
             </div>
-            <span className="text-xl font-bold text-on-secondary">Huguen</span>
           </motion.div>
 
           {/* Desktop Navigation */}
