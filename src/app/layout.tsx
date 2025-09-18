@@ -72,6 +72,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#FFB300" />
+        <meta name="google-site-verification" content="BuAMKYM_Sl6YMot8MLRsfq2eF2rRv-NHT9Qjr1GUZt8" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
