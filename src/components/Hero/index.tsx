@@ -2,178 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { ChevronDown, Star } from 'lucide-react'
-import { useEffect, useRef, useState, useCallback } from 'react'
-
-interface MousePosition {
-  x: number
-  y: number
-}
-
-interface HexagonProps {
-  x: number
-  y: number
-  baseSize: number
-  distance: number
-  hoverRadius: number
-}
-
-const HoneycombBackground: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const animationFrameRef = useRef<number | null>(null)
-  const [mousePos, setMousePos] = useState<MousePosition>({ x: 0, y: 0 })
-
-  const drawHexagon = useCallback((
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    size: number,
-    fillColor: string,
-    strokeColor: string
-  ): void => {
-    ctx.beginPath()
-    for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i
-      const xPos = x + size * Math.cos(angle)
-      const yPos = y + size * Math.sin(angle)
-      if (i === 0) {
-        ctx.moveTo(xPos, yPos)
-      } else {
-        ctx.lineTo(xPos, yPos)
-      }
-    }
-    ctx.closePath()
-    ctx.fillStyle = fillColor
-    ctx.fill()
-    ctx.strokeStyle = strokeColor
-    ctx.lineWidth = 1.5
-    ctx.stroke()
-  }, [])
-
-  const getDistance = useCallback((x1: number, y1: number, x2: number, y2: number): number => {
-    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
-  }, [])
-
-  const calculateHexagonStyle = useCallback(({ x, y, baseSize, distance, hoverRadius }: HexagonProps) => {
-    let fillColor = 'white'
-    let size = baseSize
-
-    if (distance < hoverRadius) {
-      const intensity = 1 - (distance / hoverRadius)
-      
-      // Color transition - more vibrant yellow
-      const yellow = Math.floor(255 * intensity)
-      fillColor = `rgb(255, ${255 - yellow * 0.4}, ${255 - yellow * 0.9})`
-      
-      // Size increase for popping effect
-      const sizeMultiplier = 1 + (intensity * 0.3) // Up to 30% size increase
-      size = baseSize * sizeMultiplier
-    }
-
-    return { fillColor, size }
-  }, [])
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const resizeCanvas = (): void => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
-
-    // Hexagon properties
-    const hexSize = 35
-    const hexHeight = hexSize * Math.sqrt(3)
-    const hexWidth = hexSize * 2
-    const vertDist = hexHeight * 0.75
-    const horizDist = hexWidth * 0.75
-    const hoverRadius = 140
-
-    const animate = (): void => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      const cols = Math.ceil(canvas.width / horizDist) + 2
-      const rows = Math.ceil(canvas.height / vertDist) + 2
-
-      // Store hexagon data for sorting
-      const hexagons: Array<{
-        x: number
-        y: number
-        distance: number
-        fillColor: string
-        size: number
-      }> = []
-
-      // Calculate all hexagon properties
-      for (let row = -1; row < rows; row++) {
-        for (let col = -1; col < cols; col++) {
-          const x = col * horizDist + (row % 2 === 1 ? horizDist / 2 : 0)
-          const y = row * vertDist
-
-          const distance = getDistance(mousePos.x, mousePos.y, x, y)
-          const { fillColor, size } = calculateHexagonStyle({
-            x,
-            y,
-            baseSize: hexSize * 0.8,
-            distance,
-            hoverRadius
-          })
-
-          hexagons.push({ x, y, distance, fillColor, size })
-        }
-      }
-
-      // Sort hexagons by distance (farthest first) to ensure proper layering
-      hexagons.sort((a, b) => b.distance - a.distance)
-
-      // Draw all hexagons
-      hexagons.forEach(({ x, y, fillColor, size }) => {
-        drawHexagon(ctx, x, y, size, fillColor, '#d1d5db')
-      })
-
-      animationFrameRef.current = requestAnimationFrame(animate)
-    }
-
-    const handleMouseMove = (e: MouseEvent): void => {
-      const rect = canvas.getBoundingClientRect()
-      setMousePos({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      })
-    }
-
-    const handleMouseLeave = (): void => {
-      setMousePos({ x: -1000, y: -1000 }) // Move cursor off-screen
-    }
-
-    canvas.addEventListener('mousemove', handleMouseMove)
-    canvas.addEventListener('mouseleave', handleMouseLeave)
-    animate()
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas)
-      canvas.removeEventListener('mousemove', handleMouseMove)
-      canvas.removeEventListener('mouseleave', handleMouseLeave)
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-      }
-    }
-  }, [mousePos, drawHexagon, getDistance, calculateHexagonStyle])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 z-0"
-      style={{ background: '#f9fafb' }}
-    />
-  )
-}
 
 const Hero: React.FC = () => {
   const scrollToNext = (): void => {
@@ -199,14 +27,26 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Honeycomb Background */}
-      <HoneycombBackground />
-      
-      {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/5 z-5 pointer-events-none" />
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/huguenbg.mp4" type="video/mp4" />
+          {/* Fallback for browsers that don't support video */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200" />
+        </video>
+        
+        {/* Video Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40 z-5" />
+      </div>
 
       {/* Content */}
-      <div className="relative z-10 container-max-width section-padding text-center pointer-events-none">
+      <div className="relative z-10 container-max-width section-padding text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -223,7 +63,7 @@ const Hero: React.FC = () => {
             {Array.from({ length: 5 }, (_, i) => (
               <Star key={i} className="w-5 h-5 fill-primary text-primary" />
             ))}
-            <span className="ml-2 text-gray-800 text-sm font-medium">5.0 Rating</span>
+            <span className="ml-2 text-white text-sm font-medium drop-shadow-lg">5.0 Rating</span>
           </motion.div>
 
           {/* Main Heading */}
@@ -231,7 +71,7 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-2xl"
           >
             Transform Your{' '}
             <span className="text-gradient">Hospitality</span>
@@ -239,17 +79,27 @@ const Hero: React.FC = () => {
             Business Digitally
           </motion.h1>
 
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto drop-shadow-lg"
+          >
+            Professional websites and digital solutions designed specifically for hotels, restaurants, and hospitality businesses
+          </motion.p>
+
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12 pointer-events-auto"
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary text-lg px-8 py-4"
+              className="btn-primary text-lg px-8 py-4 shadow-2xl"
               onClick={handleGetStartedClick}
               type="button"
             >
@@ -258,7 +108,7 @@ const Hero: React.FC = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-secondary text-lg px-8 py-4 text-gray-800 border-gray-800 hover:bg-gray-800 hover:text-white transition-colors duration-300"
+              className="btn-secondary text-lg px-8 py-4 text-white border-white hover:bg-white hover:text-gray-900 transition-colors duration-300 backdrop-blur-sm bg-white/10"
               onClick={handleServicesClick}
               type="button"
             >
@@ -274,17 +124,17 @@ const Hero: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.8 }}
         onClick={scrollToNext}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 rounded-lg p-2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-lg p-2"
         type="button"
         aria-label="Scroll to next section"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center text-gray-700"
+          className="flex flex-col items-center text-white"
         >
-          <span className="text-sm mb-2">Scroll to explore</span>
-          <ChevronDown className="w-6 h-6" />
+          <span className="text-sm mb-2 drop-shadow-lg">Scroll to explore</span>
+          <ChevronDown className="w-6 h-6 drop-shadow-lg" />
         </motion.div>
       </motion.button>
     </section>

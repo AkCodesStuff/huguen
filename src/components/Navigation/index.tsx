@@ -51,14 +51,14 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 max-w-screen z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-lg' 
           : 'bg-transparent'
       }`}
     >
       <div className="container-max-width section-padding">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-12 lg:h-20">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}

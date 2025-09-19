@@ -47,12 +47,6 @@ const Services = () => {
       image: "/channel.jpg"
     },
     {
-      icon: <Cloud className="w-8 h-8" />,
-      title: "Cloud & Data Solutions",
-      description: "Secure storage and real-time access to your hotel data from anywhere",
-      image: "/cloud.jpg"
-    },
-    {
       icon: <Smartphone className="w-8 h-8" />,
       title: "Branding & Digital Marketing",
       description: "SEO, social media, and guest acquisition strategies to boost your online presence",

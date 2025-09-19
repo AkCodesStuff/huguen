@@ -68,13 +68,16 @@ const About = () => {
               and digital marketing. We understand the unique challenges of the hospitality sector and deliver 
               solutions that not only look great but also perform exceptionally well.
             </p>
-            <motion.button
+            <motion.a
+              href='#contact'
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn-primary"
             >
-              View Our Services
-            </motion.button>
+             
+              Get In Touch
+           
+            </motion.a>
           </motion.div>
 
           {/* Image */}

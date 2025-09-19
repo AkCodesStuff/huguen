@@ -3,85 +3,11 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Check, Star, Crown, Zap } from 'lucide-react'
-import Image from 'next/image'
+import { ArrowRight, Zap, Clock, CheckCircle } from 'lucide-react'
 
 const Pricing = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-
-  const pricingPlans = [
-    {
-      name: "Website Plan",
-      price: 4499,
-      period: "one-time",
-      icon: <Star className="w-8 h-8" />,
-      image: "/BeeEditor.png",
-      features: [
-        "Professional website redesign",
-        "Comparable to flagship hotels",
-        "Mobile-friendly design",
-        "SEO optimized",
-        "Fast loading speed",
-        "Content management system"
-      ],
-      popular: false
-    },
-    {
-      name: "Website + Payment Gateway",
-      price: 5999,
-      period: "one-time",
-      icon: <Crown className="w-8 h-8" />,
-      image: "/BeeReceptionist.png",
-      features: [
-        "Everything in Website Plan",
-        "Secure payment gateway",
-        "Direct reservations",
-        "Save 15-20% OTA commission",
-        "Multiple payment options",
-        "Real-time booking system"
-      ],
-      popular: true
-    },
-    {
-      name: "Complete Package",
-      price: 12999,
-      period: "one-time",
-      icon: <Zap className="w-8 h-8" />,
-      image: "/BeeManager.png",
-      features: [
-        "Everything in previous plans",
-        "1 Year SEO included",
-        "Online client database",
-        "Management system access",
-        "Channel manager setup",
-        "Digital marketing support",
-        "24/7 technical support"
-      ],
-      popular: false
-    }
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
-  }
 
   return (
     <section id="pricing" ref={ref} className="min-h-screen bg-secondary py-20">
@@ -94,148 +20,129 @@ const Pricing = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-on-secondary mb-6">
-            Our <span className="text-gradient">Pricing</span>
+            Simple <span className="text-gradient">Pricing</span>
           </h2>
-          <p className="text-lg text-on-tertiary max-w-3xl mx-auto">
-            Choose from our comprehensive pricing plans designed to meet the unique needs of your hospitality business.
+          <p className="text-lg text-on-tertiary max-w-2xl mx-auto">
+            Professional hospitality websites that grow your business, starting at an affordable price point.
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
+        {/* Main Pricing Card */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="max-w-4xl mx-auto"
         >
-          {pricingPlans.map((plan, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ y: -10 }}
-              className={`relative bg-white rounded-2xl shadow-lg overflow-hidden ${
-                plan.popular ? 'ring-2 ring-primary scale-105' : ''
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute top-0 left-0 right-0 bg-primary text-on-primary text-center py-2 text-sm font-semibold">
-                  Most Popular
+          <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
+            
+            {/* Content */}
+            <div className="relative p-8 md:p-12 text-center">
+              {/* Icon */}
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={isInView ? { scale: 1 } : { scale: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-2xl mb-8"
+              >
+                <Zap className="w-10 h-10 text-white" />
+              </motion.div>
+
+              {/* Pricing */}
+              <div className="mb-8">
+                <div className="flex items-baseline justify-center gap-2 mb-4">
+                  <span className="text-6xl md:text-7xl font-bold text-primary">₹4,999</span>
+                  <span className="text-xl text-on-tertiary">/ site</span>
                 </div>
-              )}
-              
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={plan.image}
-                  alt={plan.name}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full">
-                  {plan.icon}
-                </div>
+                <p className="text-xl text-on-secondary font-semibold mb-2">
+                  Professional Website Solutions
+                </p>
+                <p className="text-on-tertiary">
+                  Starting price for custom hospitality websites
+                </p>
               </div>
 
-              <div className="p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-on-secondary mb-2">
-                    {plan.name}
-                  </h3>
-                  <div className="flex items-baseline justify-center">
-                    <span className="text-4xl font-bold text-primary">₹{plan.price.toLocaleString()}</span>
-                    <span className="text-on-tertiary ml-2">/{plan.period}</span>
-                  </div>
-                </div>
+              {/* Features Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="flex flex-col items-center text-center p-4"
+                >
+                  <CheckCircle className="w-8 h-8 text-primary mb-3" />
+                  <h4 className="font-semibold text-on-secondary mb-2">Website Design</h4>
+                  <p className="text-sm text-on-tertiary">Custom responsive design for your hospitality business</p>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="flex flex-col items-center text-center p-4"
+                >
+                  <Clock className="w-8 h-8 text-primary mb-3" />
+                  <h4 className="font-semibold text-on-secondary mb-2">Monthly Plans</h4>
+                  <p className="text-sm text-on-tertiary">Flexible subscription options for ongoing support</p>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  className="flex flex-col items-center text-center p-4"
+                >
+                  <Zap className="w-8 h-8 text-primary mb-3" />
+                  <h4 className="font-semibold text-on-secondary mb-2">Premium Features</h4>
+                  <p className="text-sm text-on-tertiary">Payment gateways, SEO, and management systems</p>
+                </motion.div>
+              </div>
 
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center">
-                      <Check className="w-5 h-5 text-primary mr-3 flex-shrink-0" />
-                      <span className="text-on-tertiary">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <motion.button
+              {/* CTA Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="space-y-4"
+              >
+                <p className="text-on-tertiary mb-6">
+                  Get detailed pricing for your specific needs and explore our monthly subscription plans
+                </p>
+                
+                <motion.a
+                  href="#contact"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
-                    plan.popular
-                      ? 'bg-primary text-on-primary hover:bg-opacity-90'
-                      : 'bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-on-primary'
-                  }`}
+                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-primary/90 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
                 >
-                  Get Started
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
+                  Connect Now
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                </motion.a>
+                
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <p className="text-sm text-on-tertiary">
+                    <span className="font-medium">Note:</span> Domain charges and payment gateway fees apply separately. All prices subject to applicable taxes.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Subscription Plans */}
+        {/* Bottom Info */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="bg-tertiary rounded-2xl p-8 md:p-12"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="text-center mt-12"
         >
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <Crown className="w-8 h-8 text-primary mr-2" />
-              <h3 className="text-3xl font-bold text-on-secondary">SUBSCRIPTIONS</h3>
-            </div>
-            <p className="text-on-tertiary max-w-2xl mx-auto">
-              Ongoing support and maintenance plans to keep your hospitality business ahead of the competition.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-              <h4 className="text-lg font-bold text-on-secondary mb-2">Tier 1</h4>
-              <div className="text-2xl font-bold text-primary mb-3">₹25,000</div>
-              <div className="text-sm text-on-tertiary mb-4">/ Year</div>
-              <ul className="text-sm text-on-tertiary space-y-2">
-                <li>• Unlimited changes</li>
-                <li>• Unlimited redesigns</li>
-                <li>• Free SEO included</li>
-              </ul>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-              <h4 className="text-lg font-bold text-on-secondary mb-2">Tier 2</h4>
-              <div className="text-2xl font-bold text-primary mb-3">₹7,999</div>
-              <div className="text-sm text-on-tertiary mb-4">/ Year</div>
-              <ul className="text-sm text-on-tertiary space-y-2">
-                <li>• 15 major changes/M</li>
-                <li>• 5 redesigns included</li>
-                <li>• Priority support</li>
-              </ul>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-              <h4 className="text-lg font-bold text-on-secondary mb-2">Tier 3</h4>
-              <div className="text-2xl font-bold text-primary mb-3">₹4,999</div>
-              <div className="text-sm text-on-tertiary mb-4">/ Year</div>
-              <ul className="text-sm text-on-tertiary space-y-2">
-                <li>• 10 major changes/M</li>
-                <li>• 2 redesigns included</li>
-                <li>• Standard support</li>
-              </ul>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-              <h4 className="text-lg font-bold text-on-secondary mb-2">Tier 4</h4>
-              <div className="text-2xl font-bold text-primary mb-3">₹1,499</div>
-              <div className="text-sm text-on-tertiary mb-4">/ Year</div>
-              <ul className="text-sm text-on-tertiary space-y-2">
-                <li>• 5 major changes/M</li>
-                <li>• No redesigns</li>
-                <li>• Basic support</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="mt-8 text-center">
-            <p className="text-sm text-on-tertiary">
-              Domain Charges and Gateway Fees Applicable Separately | All prices are subject to taxes
-            </p>
+          <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm rounded-full px-6 py-3">
+            <Clock className="w-5 h-5 text-primary" />
+            <span className="text-sm text-on-secondary font-medium">
+              Monthly subscriptions available from ₹499/month
+            </span>
           </div>
         </motion.div>
       </div>

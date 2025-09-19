@@ -23,9 +23,9 @@ const GetInTouch = () => {
   const contactInfo = [
     {
       icon: <MapPin className="w-6 h-6" />,
-      title: "Address",
+      title: "Current Address",
       details: "Delhi, India",
-      description: "Delhi-based full-stack solution firm"
+      description: "Hotel's Digital solutions firm"
     },
     {
       icon: <Phone className="w-6 h-6" />,

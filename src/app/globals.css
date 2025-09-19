@@ -24,6 +24,7 @@ html {
 body {
   color: var(--color-on-secondary);
   background: var(--color-secondary);
+  
   font-family: 'Inter', system-ui, sans-serif;
 }
 
